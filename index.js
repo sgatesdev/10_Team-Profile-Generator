@@ -1,28 +1,26 @@
-// Import inquirer, generateMarkdown and FS modules
+// import inquirer and FS modules
 var inquirer = require('inquirer');
+const fs = require('fs');
 
-// import my classes
+// import module to generate team page
+var teamPage = require('./lib/page.js');
+
+// import classes
 const Manager = require('./lib/manager.js');
 const Engineer = require('./lib/engineer.js');
 const Intern = require('./lib/intern.js');
 
-//var markdown = require('./utils/generateMarkdown.js');
-const fs = require('fs');
-
-/************* LOOK DOWN **************/
-
-// program flow: manager function, engineer-intern-done function, engineer function, intern function, done function 
-// use OOP to construct new engineer, etc. from user input before passing to FILE FUNCTION
-
+// set a few global variables
 var supervisor;
 var engineers = [];
 var interns = [];
 
+// start app
 init();
 
-// Gather user input, then call writeToFile to generate README
+// create a Manager object using user input, then move on to add engineer, intern, or finish building
 function init() {
-    // Define list of questions to ask user
+    // List of MANAGER questions
     let questions = [
         {
             type: 'input',
@@ -50,7 +48,7 @@ function init() {
     .prompt(questions)
     .then(manager => {
         // create new Manager object, make that "supervisor" value
-         supervisor = new Manager(manager.name,manager.id,manager.email,manager.officeNumber);
+         supervisor = new Manager(manager.name,manager.id,manager.email,manager.office);
 
         // call function for landing page for three choices: engineer, intern, or finish
         addEmployee();
@@ -61,6 +59,7 @@ function init() {
     });
 }
 
+// prompt user to choose 1) add an engineer 2) add employee or 3) finish building team
 function addEmployee() {
     // set questions
     let question = [
@@ -75,7 +74,7 @@ function addEmployee() {
     inquirer
     .prompt(question)
     .then(answers => {
-      console.log(answers);
+      // send the user where they want to go!
       switch(answers.user_choice) {
           case 'Add engineer':
               addEngineer();
@@ -94,6 +93,7 @@ function addEmployee() {
     });
 }
 
+// create an Engineer object using user input
 function addEngineer() {
         // Define list of questions to ask user
         let questions = [
@@ -123,7 +123,7 @@ function addEngineer() {
         .prompt(questions)
         .then(engineer => {
             // build engineer object
-            let newEngineer = new Engineer(engineer.name,engineer.id,engineer.email,engineer.gitHub);
+            let newEngineer = new Engineer(engineer.name,engineer.id,engineer.email,engineer.github);
 
             // insert engineer object into employees array
             engineers.push(newEngineer);
@@ -137,6 +137,7 @@ function addEngineer() {
         });
 }
 
+// create an Intern object using user input
 function addIntern() {
     // Define list of questions to ask user
     let questions = [
@@ -180,11 +181,10 @@ function addIntern() {
     });
 }
 
+// write team profile page and store those files in ./dist
 function finishTeam() {
-    // write code to write file
-
-    // for now, just console.log
-    console.log(supervisor);
-    console.log(engineers);
-    console.log(interns);
+    // finish process by writing file, displaying success or error msg
+    fs.writeFile('./dist/team_page.html', teamPage(supervisor, interns, engineers), (err) =>
+      err ? console.error(err) : console.log('Generated team page!')
+    );
 }
