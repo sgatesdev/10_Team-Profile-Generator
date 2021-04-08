@@ -1,3 +1,5 @@
+// Team Profile Generator!
+
 // import inquirer and FS modules
 var inquirer = require('inquirer');
 const fs = require('fs');
@@ -20,6 +22,9 @@ init();
 
 // create a Manager object using user input, then move on to add engineer, intern, or finish building
 function init() {
+    // Display welcome message
+    console.log('\nThank you for choosing to use this Team Profile Generator! \nIf you have used it before, please back up your team_page.html file (found in ./dist). For all questions refer to the README.\n');
+
     // List of MANAGER questions
     let questions = [
         {
