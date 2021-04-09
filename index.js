@@ -1,4 +1,4 @@
-// Team Profile Generator!
+// Team Profile Generator
 
 // import inquirer and FS modules
 var inquirer = require('inquirer');
