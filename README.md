@@ -5,7 +5,7 @@
   
   ## Description
 
-  I created this app to quickly create a team profile page for future group projects or collaborations. It solves the issue of spending valuable time creating a simple page by generating a page from simple command line inputs. I learned how to create my own classes, and how to make recursive Inquirer prompts. 
+  I created this app to quickly create a team profile page for future group projects or collaborations. It solves the issue of spending valuable time creating a team page by generating a basic website from simple command line inputs. I learned how to create my own modules, how to make recursive Inquirer prompts, and how to utilize Jest. 
 
   ## Table of Contents 
   
@@ -20,7 +20,7 @@
   
   ## Installation
 
-  You install the project by cloning the Github Repo, then installing Node.js and Inquirer. 
+  You install the project by cloning the Github Repo, then installing Node.js and Inquirer. You can also download the code or copy it to your machine.
   
   ## Usage
 
@@ -36,7 +36,7 @@
   
   ## Test
 
-  You test the app by running the code and comparing your input to the generated page. 
+  You can test the app using Jest. You can also test the app by running the code and comparing your input to the generated page. 
   
   ## License
   
